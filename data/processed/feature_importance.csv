@@ -1,0 +1,113 @@
+Feature,Importance
+disruption_likelihood_score,0.9733734
+supplier_country_Bangladesh,0.002754199
+weather_condition_severity,0.0026833215
+inventory_coverage,0.0021577543
+supplier_reliability_score,0.0017644982
+order_fulfillment_status,0.0016403064
+route_risk_level,0.0013719015
+shipping_costs,0.0012327989
+delay_impact,0.0011806119
+handling_equipment_availability,0.0011351149
+delay_probability,0.0011102199
+supplier_country_Jamaica,0.001101942
+lead_time_days,0.0010835212
+logistics_risk,0.0010499799
+supplier_efficiency,0.0010407608
+warehouse_inventory_level,0.0009584738
+customs_clearance_time,0.0008921517
+historical_demand,0.0008475212
+supplier_country_Kyrgyzstan,0.00071844336
+cargo_condition_status,0.00068663503
+delivery_time_deviation,0.000678216
+supplier_country_Qatar,0.0005382772
+supplier_country_Armenia,0.0
+supplier_country_Algeria,0.0
+supplier_country_Azerbaijan,0.0
+supplier_country_Belgium,0.0
+supplier_country_Bolivia,0.0
+supplier_country_Bosnia and Herzegovina,0.0
+supplier_country_Brazil,0.0
+supplier_country_Australia,0.0
+supplier_country_Austria,0.0
+supplier_country_Argentina,0.0
+supplier_country_Chile,0.0
+supplier_country_China,0.0
+supplier_country_Colombia,0.0
+supplier_country_Costa Rica,0.0
+supplier_country_Cuba,0.0
+supplier_country_Czech Republic,0.0
+supplier_country_Denmark,0.0
+supplier_country_Dominican Republic,0.0
+supplier_country_Ecuador,0.0
+supplier_country_Egypt,0.0
+supplier_country_Ethiopia,0.0
+supplier_country_Fiji,0.0
+supplier_country_Finland,0.0
+supplier_country_Bulgaria,0.0
+supplier_country_Cambodia,0.0
+supplier_country_Canada,0.0
+supplier_country_Germany,0.0
+supplier_country_Georgia,0.0
+supplier_country_France,0.0
+supplier_country_Guatemala,0.0
+supplier_country_Hungary,0.0
+supplier_country_India,0.0
+supplier_country_Indonesia,0.0
+supplier_country_Ghana,0.0
+supplier_country_Iran,0.0
+supplier_country_Iraq,0.0
+supplier_country_Israel,0.0
+supplier_country_Ireland,0.0
+supplier_country_Italy,0.0
+supplier_country_Japan,0.0
+supplier_country_Jordan,0.0
+supplier_country_Greece,0.0
+supplier_country_Kazakhstan,0.0
+supplier_country_Kenya,0.0
+supplier_country_Laos,0.0
+supplier_country_Malaysia,0.0
+supplier_country_Mexico,0.0
+supplier_country_Morocco,0.0
+supplier_country_Myanmar,0.0
+supplier_country_Nepal,0.0
+supplier_country_Netherlands,0.0
+supplier_country_New Zealand,0.0
+supplier_country_Nigeria,0.0
+supplier_country_North Macedonia,0.0
+supplier_country_Norway,0.0
+supplier_country_Oman,0.0
+supplier_country_Pakistan,0.0
+supplier_country_Haiti,0.0
+supplier_country_Panama,0.0
+supplier_country_Papua New Guinea,0.0
+supplier_country_Peru,0.0
+supplier_country_Paraguay,0.0
+supplier_country_Philippines,0.0
+supplier_country_Poland,0.0
+supplier_country_Portugal,0.0
+supplier_country_Romania,0.0
+supplier_country_Russia,0.0
+supplier_country_Saudi Arabia,0.0
+supplier_country_Senegal,0.0
+supplier_country_Serbia,0.0
+supplier_country_Singapore,0.0
+supplier_country_Slovakia,0.0
+supplier_country_South Africa,0.0
+supplier_country_South Korea,0.0
+supplier_country_Spain,0.0
+supplier_country_Sri Lanka,0.0
+supplier_country_Sweden,0.0
+supplier_country_Switzerland,0.0
+supplier_country_Thailand,0.0
+supplier_country_Trinidad and Tobago,0.0
+supplier_country_Tunisia,0.0
+supplier_country_Turkey,0.0
+supplier_country_Turkmenistan,0.0
+supplier_country_UAE,0.0
+supplier_country_UK,0.0
+supplier_country_USA,0.0
+supplier_country_Ukraine,0.0
+supplier_country_Uruguay,0.0
+supplier_country_Uzbekistan,0.0
+supplier_country_Vietnam,0.0
