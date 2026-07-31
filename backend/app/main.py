@@ -5,6 +5,7 @@ from app.database import Base, engine
 from app.routers.predictions import router as predictions_router
 from app.routers.analytics import router as analytics_router
 from app.routers.model import router as model_router
+from app.routers.optimization import router as optimization_router
 from app.models.shipment_prediction import ShipmentPrediction  # noqa: F401
 
 Base.metadata.create_all(bind=engine)
@@ -25,6 +26,7 @@ app.add_middleware(
 app.include_router(predictions_router)
 app.include_router(analytics_router)
 app.include_router(model_router)
+app.include_router(optimization_router)
 
 @app.get("/")
 def home():
