@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 
 from app.models.shipment_prediction import ShipmentPrediction
 from app.schemas.shipment_prediction import ShipmentPredictionCreate
+from app.services import ml_service
 
 WEATHER_RISK = {
     "clear": 0.0,
@@ -38,6 +39,22 @@ def _calculate_delay_probability(data: ShipmentPredictionCreate) -> float:
         + 0.15 * vehicle_risk
     )
     return round(min(max(probability, 0.0), 1.0), 4)
+
+def predict_delay_and_probability(data: ShipmentPredictionCreate):
+    ml_result = ml_service.predict_with_model(
+        distance=data.distance,
+        weather=data.weather,
+        traffic=data.traffic,
+        vehicle_type=data.vehicle_type,
+    )
+
+    if ml_result is not None:
+        prediction, probability = ml_result
+    else:
+        probability = _calculate_delay_probability(data)
+        prediction = "Delayed" if probability >= 0.5 else "On Time"
+
+    return prediction, probability
 
 def _get_recommendation(
     prediction: str, probability: float, data: ShipmentPredictionCreate
@@ -84,8 +101,7 @@ def create_prediction(
     db: Session, data: ShipmentPredictionCreate
 ) -> ShipmentPrediction:
     shipment_id = f"SHP-{uuid.uuid4().hex[:8].upper()}"
-    probability = _calculate_delay_probability(data)
-    prediction = "Delayed" if probability >= 0.5 else "On Time"
+    prediction, probability = predict_delay_and_probability(data)
     recommendation = _get_recommendation(prediction, probability, data)
 
     db_prediction = ShipmentPrediction(
