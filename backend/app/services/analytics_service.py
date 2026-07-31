@@ -11,7 +11,7 @@ from app.schemas.analytics import (
     RiskBreakdownItem,
 )
 from app.services.prediction_service import (
-    _calculate_delay_probability,
+    predict_delay_and_probability,
     _get_recommendation,
 )
 
@@ -24,8 +24,7 @@ def create_batch_predictions(
 
     for item in batch_data.shipments:
         shipment_id = f"SHP-{uuid.uuid4().hex[:8].upper()}"
-        probability = _calculate_delay_probability(item)
-        prediction = "Delayed" if probability >= 0.5 else "On Time"
+        prediction, probability = predict_delay_and_probability(item)
         recommendation = _get_recommendation(prediction, probability, item)
 
         if prediction == "Delayed":
