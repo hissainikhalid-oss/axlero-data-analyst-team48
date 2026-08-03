@@ -84,7 +84,7 @@ SupplyPrescript/
 
 
 
-\### Khalid (its me)
+\### Khalid(its me)
 
 \- Dataset collection
 
@@ -148,9 +148,9 @@ SupplyPrescript/
 
 \## Branches
 
-for example:
 
 
+for Example:
 
 \- main
 
