@@ -11,6 +11,14 @@ python-dateutil==2.9.0.post0
 scipy==1.18.0
 six==1.17.0
 tzdata==2026.3
+pandas
+numpy
+scikit-learn
+xgboost
+matplotlib
+joblib
+jupyter
+notebook
 fastapi>=0.100.0
 uvicorn>=0.22.0
 sqlalchemy>=2.0.0
