@@ -21,6 +21,7 @@ TRAFFIC_IMPACT = {
     "High": 1.6,
 }
 
+
 def optimize_shipment_route(
     distance: float,
     weather: str,
@@ -28,6 +29,7 @@ def optimize_shipment_route(
     current_vehicle: str,
     urgency_level: str = "Medium",
 ) -> Dict[str, Any]:
+
     w_factor = WEATHER_IMPACT.get(weather.title(), 1.1)
     t_factor = TRAFFIC_IMPACT.get(traffic.title(), 1.1)
 
@@ -35,30 +37,110 @@ def optimize_shipment_route(
 
     for mode, profile in TRANSPORT_MODES.items():
         adjusted_speed = profile["speed_kmh"] / (w_factor * t_factor)
+
         estimated_hours = round(distance / adjusted_speed, 2)
-        total_cost = round(distance * profile["cost_per_km"], 2)
-        mode_risk = round(min(profile["base_risk"] * w_factor * t_factor, 0.99), 4)
+
+        total_cost = round(
+            distance * profile["cost_per_km"],
+            2
+        )
+
+        mode_risk = round(
+            min(
+                profile["base_risk"] * w_factor * t_factor,
+                0.99
+            ),
+            4
+        )
 
         route_options.append({
             "transport_mode": mode,
             "estimated_hours": estimated_hours,
             "estimated_cost": total_cost,
             "risk_score": mode_risk,
-            "is_current": mode.lower() in current_vehicle.lower() or current_vehicle.lower() in mode.lower()
+            "is_current": (
+                mode.lower() in current_vehicle.lower()
+                or current_vehicle.lower() in mode.lower()
+            )
         })
 
-    current_option = next((o for o in route_options if o["is_current"]), route_options[0])
+    current_option = next(
+        (o for o in route_options if o["is_current"]),
+        route_options[0]
+    )
 
-    if urgency_level.lower() == "high":
-        best_option = min(route_options, key=lambda x: (x["estimated_hours"], x["risk_score"]))
-    elif urgency_level.lower() == "cost_sensitive":
-        best_option = min(route_options, key=lambda x: (x["estimated_cost"], x["risk_score"]))
+    urgency = urgency_level.lower()
+
+    # High urgency: prioritize speed and risk
+    if urgency == "high":
+        best_option = min(
+            route_options,
+            key=lambda x: (
+                x["estimated_hours"],
+                x["risk_score"]
+            )
+        )
+
+    # Low urgency: prioritize cost and risk
+    elif urgency == "low":
+        best_option = min(
+            route_options,
+            key=lambda x: (
+                x["estimated_cost"],
+                x["risk_score"]
+            )
+        )
+
+    # Cost-sensitive: strongly prioritize cost
+    elif urgency == "cost_sensitive":
+        best_option = min(
+            route_options,
+            key=lambda x: (
+                x["estimated_cost"],
+                x["risk_score"]
+            )
+        )
+
+    # Medium urgency: balance cost, time and risk
     else:
-        best_option = min(route_options, key=lambda x: (x["risk_score"] * 0.5 + (x["estimated_hours"] / 100) * 0.5))
+        best_option = min(
+            route_options,
+            key=lambda x: (
+                x["risk_score"] * 0.4
+                + (x["estimated_hours"] / 100) * 0.3
+                + (x["estimated_cost"] / 10000) * 0.3
+            )
+        )
 
-    time_saved = round(max(current_option["estimated_hours"] - best_option["estimated_hours"], 0.0), 2)
-    cost_diff = round(best_option["estimated_cost"] - current_option["estimated_cost"], 2)
-    risk_reduction = round(max((current_option["risk_score"] - best_option["risk_score"]) * 100, 0.0), 2)
+    time_saved = round(
+        max(
+            current_option["estimated_hours"]
+            - best_option["estimated_hours"],
+            0.0
+        ),
+        2
+    )
+
+    cost_diff = round(
+        best_option["estimated_cost"]
+        - current_option["estimated_cost"],
+        2
+    )
+
+    # Relative risk reduction
+    if current_option["risk_score"] > 0:
+        risk_reduction = round(
+            (
+                (
+                    current_option["risk_score"]
+                    - best_option["risk_score"]
+                )
+                / current_option["risk_score"]
+            ) * 100,
+            2
+        )
+    else:
+        risk_reduction = 0.0
 
     return {
         "original_mode": current_vehicle,
@@ -72,5 +154,8 @@ def optimize_shipment_route(
         "time_saved_hours": time_saved,
         "cost_impact": cost_diff,
         "risk_reduction_percentage": risk_reduction,
-        "all_options": sorted(route_options, key=lambda x: x["risk_score"])
+        "all_options": sorted(
+            route_options,
+            key=lambda x: x["risk_score"]
+        )
     }
