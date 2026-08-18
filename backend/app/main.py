@@ -8,6 +8,8 @@ from app.routers.model import router as model_router
 from app.routers.optimization import router as optimization_router
 from app.routers.reports import router as reports_router
 from app.models.shipment_prediction import ShipmentPrediction  # noqa: F401
+from app.models.decision import Decision  # noqa: F401
+from app.routers.decisions import router as decisions_router
 
 Base.metadata.create_all(bind=engine)
 
@@ -29,6 +31,7 @@ app.include_router(analytics_router)
 app.include_router(model_router)
 app.include_router(optimization_router)
 app.include_router(reports_router)
+app.include_router(decisions_router)
 
 @app.get("/")
 def home():
