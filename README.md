@@ -76,7 +76,7 @@ The frontend is deployed as a Render Static Site.
 
 Replace this line with the exact frontend Render URL.
 
-https://<your-frontend-service>.onrender.com
+(https://supplyprescript-v2u9.onrender.com)
 
 Render Free-Tier Note
 
